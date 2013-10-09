@@ -1,0 +1,21 @@
+## SOME DEBUGGING OF SHARED LIBRARIES
+## You may have to do the following: sudo apt-get install strace
+#  THIS SHOWS HOW THAT LIBRARIES ARE SEARCHED DIFFERENTLY
+rm debug2 && LD_DEBUG=all /usr/lib/firefox/firefox 2>debug2 &
+fork do
+   ENV['LD_DEBUG']='all'
+   ENV['LD_DEBUG_OUTPUT']='JUNKdebug'
+   exec '/usr/lib/firefox/firefox'
+end
+# HERE WE RESET THE LD_LIBRARY_PATH and therefore prevent the rails from using the "bad" LD_LIBRARY_PATH
+fork do
+      exec({"LD_LIBRARY_PATH"=>""}, "/bin/bash -c'/usr/lib/firefox/firefox test'")
+end
+# THIS MINI-SCRIPT BELOW SHOWS THAT LD_LIBRARY_PATH is set and this is where the search paths come from
+fork do
+   exec  "strace  -v -s500 '/usr/lib/firefox/firefox"
+end 
+## I found that:/opt/bitnami/scripts/setenv.sh is where all the important ruby stuff is set!!
+## rails runs with !/usr/bin/env ruby
+## The ruby file then calls the /opt/bitnami/scripts/setenv.sh
+###### This is where many environment variables are set!!!

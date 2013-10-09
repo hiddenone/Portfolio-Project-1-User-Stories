@@ -1,3 +1,4 @@
+require 'debugger'
 class StoriesController < ApplicationController
   before_filter :require_login
   
@@ -5,11 +6,12 @@ class StoriesController < ApplicationController
   # GET /stories.json
   # note:  tagged_with is defined in story.rb
   def index
+
     if params[:tag]
       @stories = Story.tagged_with(params[:tag]).properly_ordered
     else
       @stories = Story.properly_ordered
-            
+        
     end
 
     respond_to do |format|
@@ -17,6 +19,127 @@ class StoriesController < ApplicationController
       format.json { render json: @stories }
     end
   end
+
+
+  # GET /stories/search
+  # GET /stories/search.json
+  # note:  tagged_with is defined in story.rb
+  def searchXXXXXXX #EXCEPT FOR SORT ORDER#OLD ONE THAT WORKED
+
+      
+
+      #@stories = Story.ordered_properly.search(params[:search])
+      #@stories = Story.search(params[:search])
+      @stories = Story.search params[:search],:sql => {
+              :include => :tags,
+              
+              :joins => [:status, :priority],
+              :sort_mode => :extended,
+              :select =>  'stories.*, statuses.status_order as status_order,
+                                statuses.name as status_name,
+                                 priorities.priority_order as priority_order,
+                                 priorities.name as priority_name',
+               :order =>" statuses.status_order, priorities.priority_order,created_at DESC"
+             }
+
+
+ respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @stories }
+    end
+  end
+
+def searchxxx0#DOES NOT WORK GETS THIS ERROR:
+           #sphinxql: syntax error, unexpected CONST_FLOAT, expecting FROM or ',' near '.*, statuses.status_order as status_order,
+           #                     statuses.name as status_name,
+           #                      priorities.priority_order as priority_order,
+           #                     priorities.name as priority_name FROM `story_core` WHERE MATCH('find') AND `sphinx_deleted` = 0 ORDER BY `statuses.status_order,` priorities.priority_order,created_at DESC LIMIT 0, 20; SHOW META'
+
+      
+
+      #@stories = Story.ordered_properly.search(params[:search])
+      #@stories = Story.search(params[:search])
+      #@stories = Story.ordered_prop0.search(params[:search])
+     @stories = Story.ordered_propall.search(params[:search]).populate
+    
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @stories }
+    end
+  end
+def searchWORKS01#### This is the first time that totally searches full text 
+           #sphinxql: syntax error, unexpected CONST_FLOAT, expecting FROM or ',' near '.*, statuses.status_order as status_order,
+           #                     statuses.name as status_name,
+           #                      priorities.priority_order as priority_order,
+           #                     priorities.name as priority_name FROM `story_core` WHERE MATCH('find') AND `sphinx_deleted` = 0 ORDER BY `statuses.status_order,` priorities.priority_order,created_at DESC LIMIT 0, 20; SHOW META'
+
+      
+
+      #@stories = Story.ordered_properly.search(params[:search])
+      #@stories = Story.search(params[:search])
+      #@stories = Story.ordered_prop0.search(params[:search])
+     #@stories = Story.ordered_propall.search(params[:search]).populate
+
+    @stories = Story.search 'database',
+              :sort_mode => :extended,
+              :joins => [:status,:priority],
+              :order => 'status_order DESC, priority_order DESC',
+              :include => :tags,
+    :sql => {
+              :include => :tags,
+              
+              :joins => [:status, :priority],
+              :sort_mode => :extended,
+              :select =>  'stories.*, statuses.status_order as status_order,
+                                statuses.name as status_name,
+                                 priorities.priority_order as priority_order,
+                                 priorities.name as priority_name',
+               :order =>" statuses.status_order, priorities.priority_order,created_at DESC"
+             }
+     put 'DEBUG from StoriesController#search'
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @stories }
+    end
+  end
+def search#### This is the first time that totally searches full text 
+           #sphinxql: syntax error, unexpected CONST_FLOAT, expecting FROM or ',' near '.*, statuses.status_order as status_order,
+           #                     statuses.name as status_name,
+           #                      priorities.priority_order as priority_order,
+           #                     priorities.name as priority_name FROM `story_core` WHERE MATCH('find') AND `sphinx_deleted` = 0 ORDER BY `statuses.status_order,` priorities.priority_order,created_at DESC LIMIT 0, 20; SHOW META'
+
+      
+
+      #@stories = Story.ordered_properly.search(params[:search])
+      #@stories = Story.search(params[:search])
+      #@stories = Story.ordered_prop0.search(params[:search])
+     #@stories = Story.ordered_propall.search(params[:search]).populate
+    @stories = Story.search  params[:search],
+             :sort_mode => :extended,
+              :joins => [:status,:priority],
+             :order => 'status_order ASC, priority_order DESC, days_old DESC',
+              :include => :tags,
+    :sql => {
+              :include => :tags,
+              
+              :joins => [:status, :priority],
+              :sort_mode => :extended,
+              :select =>  'stories.*, statuses.status_order as status_order,
+                                statuses.name as status_name,
+                                 priorities.priority_order as priority_order,
+                                 priorities.name as priority_name',
+               :order =>" statuses.status_order , priorities.priority_order  ,created_at "
+             }
+
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @stories }
+    end
+  end
+
 
   # GET /stories/1
   # GET /stories/1.json
@@ -140,4 +263,9 @@ class StoriesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+def search_notes
+   @stories =  Story.search params[:search]
 end
+end
+

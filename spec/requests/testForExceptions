@@ -1,0 +1,9 @@
+describe "something else" do
+ it "should fail" do
+   1/0
+   end
+   after(:each) do
+   puts "DEBUG EXCEPTIONS #{example.exception}"
+end
+
+end

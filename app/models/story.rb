@@ -1,17 +1,25 @@
 class Story < ActiveRecord::Base
+
+  include ThinkingSphinx::Scopes
+  #include debugger
+
   belongs_to :user
   has_many :taggings
   has_many :tags, :through => :taggings
   belongs_to :priority
   belongs_to :status
+
   attr_writer :tags_to_add, :tags_to_remove
   
+
+
   validates :status_id, :presence => true
   validates :priority_id, :presence => true #, :inclusion => { :in => %w(High Medium Low) }
   validates :as_a, :presence => true
   validates :i_want_to, :presence => true
   validates :so_that, :presence => true
   validates :user_id, :presence => true
+
 
 =begin
 All this tagging stuff deferred until after bullet gem
@@ -31,6 +39,46 @@ All this tagging stuff deferred until after bullet gem
                                 statuses.name as status_name,
                                  priorities.priority_order as priority_order,
                                  priorities.name as priority_name')
+
+  sphinx_scope(:ordered_properly) { 
+    
+      order("statuses.status_order, priorities.priority_order,
+                             created_at DESC").
+#                            include(:tags),    to please Bullet gem - but didn't work
+                             includes(:tags).
+                             joins(:status, :priority).
+                                select('stories.*, statuses.status_order as status_order,
+                                statuses.name as status_name,
+                                 priorities.priority_order as priority_order,
+                                 priorities.name as priority_name')
+    
+    
+  }
+  sphinx_scope(:ordered_prop0) {
+              {  # This is necessary for this to be a hash!
+              :include => :tags,
+              :order =>" statuses.status_order, priorities.priority_order,created_at DESC",
+              :joins => [:status, :priority],
+              :select =>  'stories.*, statuses.status_order as status_order,
+                                statuses.name as status_name,
+                                 priorities.priority_order as priority_order,
+                                 priorities.name as priority_name'
+             }
+  }
+
+sphinx_scope(:ordered_propall) {
+              {  # This is necessary for this to be a hash!
+              :include => :tags,
+              :order =>" statuses.status_order, priorities.priority_order,created_at DESC",
+              :joins => [:status, :priority],
+              :select =>  'stories.id, stories.as_a, stories.i_want_to, stories.so_that, 
+                          stories.created_at, stories.datetime, stories.updated_at,
+                          stories.datetime, stories.notes, stories.status, stories.user_id, 
+                          stories.priority: stories.status_id, stories.priority_id'
+                                 #priorities.priority_order as priority_order,
+                                 #priorities.name as priority_name from story, priority, status'
+             }
+  }
 
   # TODO: Figure out how to do this without running into problems with params
   #       not being undefined at runtime.

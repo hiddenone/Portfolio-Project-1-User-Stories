@@ -52,6 +52,8 @@ describe "un successful login" do
       lambda do 
         ##puts 'PUTZSUCCESSFUL LOGIN!!!!!!!!!!!!!!!!!!! PUTZ'
         visit "/signup"
+        debugger
+        save_and_open_page
         fill_in('user_email', :with => @user[:email])
         fill_in('user_password', :with => @user[:password])
         #click_button "Log in"
@@ -386,7 +388,7 @@ describe "sign upAAAAAAAAAAA" do
           fill_in('story_notes', :with => @new_storyB[:notes])
           click_button "Create Story"
           first(:link, "Back to All Stories").click
-
+          
           ###puts "After ====Story.count#{Story.count}"
           ###puts "After ====Story.all #{Story.all}"
           ###puts page.body
@@ -394,7 +396,6 @@ describe "sign upAAAAAAAAAAA" do
           #save_and_open_page
           visit("/stories")
            ####TOITALGARBAGE
-          save_and_open_page
           ###puts("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
           ###puts page.body
           ###puts("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")

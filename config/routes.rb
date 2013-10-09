@@ -8,13 +8,17 @@ Pp1::Application.routes.draw do
 
   get 'tags/:tag', to: 'stories#index', as: :tag
 
+  get "stories/search" => "stories#search",  :as => "search_stories"
+  
+
   resources :stories do
     collection do
       post :edit_multiple
       put :update_multiple
     end
   end
-  
+
+
   resources :users
   resources :sessions
   

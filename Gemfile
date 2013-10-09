@@ -8,8 +8,8 @@ gem 'rails', '3.2.11'
 gem 'pg'
 
 
-gem 'thinking-sphinx' #{}"~> 3.0.2"
-gem 'mysql2'  #{}"0.3.12b5"
+gem 'mysql2',          '0.3.13'
+gem 'thinking-sphinx', '3.0.5'
 
 # therubyracer provices a JavaScript container
 #    this is not needed for Windows
@@ -39,10 +39,37 @@ group :development, :test do
   gem "rspec-rails"
   gem "launchy"
   gem "debugger"
+ ###########################
+ gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+ 
+  # Pry gems related to debugging. Move this outside the development group
+  # in case production debugging is necessary. Note, pry-debugger works
+  # in production and conflicts locally with RubyMine, use pry-nav + ~/.pryrc instead.
+  # Unfortunately pry-nav does not work in production, so you are left with
+  # pry-debugger.
+  #
+  # Locally where RubyMine exists:
+  # group :development, :test do
+  #   gem 'pry'
+  #   gem 'pry-remote'
+  #   gem 'pry-nav'
+  # end
+  #
+  # Production Debugging: See config/environments/production.rb
+  # gem 'pry'
+  # gem 'pry-remote'
+  # gem 'pry-debugger'
+ 
+  #gem 'pry'
+  #gem 'pry-remote'
+  #gem 'pry-nav'
+ ###########################
   gem "pry-rescue"
   gem "pry-stack_explorer"
   gem "pry-doc"
-  gem "pry-debugger"
+#  gem "pry-debugger"
   gem "runner"
 end
 

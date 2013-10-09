@@ -1,0 +1,14 @@
+What to worry about for testing:
+
+A)  Common Rails Testing Mistakes:
+http://justinleitgeb.com/rails/common-rails-testing-mistakes/
+     1. Factory.build versus Factory.create
+     2. Time- worry about it
+     3. Creating Persiste ActiveRecord objects in loop- mock it
+     4. Prepare and/or migrate database
+     5. Javascript tests run in another thrread
+     6. Tranactions!
+     7. Make sure transactions get rolled back
+     8. Changing Global State without rolling back
+     9. Depending on an order that isn't guaranteed
+     
