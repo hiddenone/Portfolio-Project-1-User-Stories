@@ -18,7 +18,7 @@ gem 'thinking-sphinx', '3.0.5'
 # under Ubuntu, run
 #     bundle install
 group :not_windows do
-   gem 'therubyracer'
+   gem 'therubyracer', :require=>'v8', :platforms => :ruby
 end
 
 gem 'execjs'
