@@ -6,4 +6,11 @@ tmp/
 *.komodoedit
 *.komodoproject
 *.idea
+config/development.sphinx.conf
+db/sphinx/development/
+db/sphinx/test/
+
+
+log/development.sphinx.pid
+
 Gemfile.lock
