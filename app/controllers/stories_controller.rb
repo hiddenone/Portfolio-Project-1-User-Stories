@@ -20,7 +20,7 @@ class StoriesController < ApplicationController
     end
   end
 
-
+=begin
   # GET /stories/search
   # GET /stories/search.json
   # note:  tagged_with is defined in story.rb
@@ -104,7 +104,8 @@ def searchWORKS01#### This is the first time that totally searches full text
       format.json { render json: @stories }
     end
   end
-def search#### This is the first time that totally searches full text 
+=end
+def search   #### This is the first time that totally searches full text 
            #sphinxql: syntax error, unexpected CONST_FLOAT, expecting FROM or ',' near '.*, statuses.status_order as status_order,
            #                     statuses.name as status_name,
            #                      priorities.priority_order as priority_order,
@@ -117,10 +118,12 @@ def search#### This is the first time that totally searches full text
       #@stories = Story.ordered_prop0.search(params[:search])
      #@stories = Story.ordered_propall.search(params[:search]).populate
     @stories = Story.search  params[:search],
+    # This from here to
              :sort_mode => :extended,
-              :joins => [:status,:priority],
+             :joins => [:status,:priority],
              :order => 'status_order ASC, priority_order DESC, days_old DESC',
-              :include => :tags,
+             :include => :tags,
+    #here could be put into a sphinx scope
     :sql => {
               :include => :tags,
               

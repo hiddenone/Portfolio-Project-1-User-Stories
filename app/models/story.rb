@@ -39,7 +39,8 @@ All this tagging stuff deferred until after bullet gem
                                 statuses.name as status_name,
                                  priorities.priority_order as priority_order,
                                  priorities.name as priority_name')
-
+=begin
+  ### Experiment, not ordering correctly
   sphinx_scope(:ordered_properly) { 
     
       order("statuses.status_order, priorities.priority_order,
@@ -54,6 +55,7 @@ All this tagging stuff deferred until after bullet gem
     
     
   }
+  ### Experiment
   sphinx_scope(:ordered_prop0) {
               {  # This is necessary for this to be a hash!
               :include => :tags,
@@ -65,7 +67,7 @@ All this tagging stuff deferred until after bullet gem
                                  priorities.name as priority_name'
              }
   }
-
+ #Experiment
 sphinx_scope(:ordered_propall) {
               {  # This is necessary for this to be a hash!
               :include => :tags,
@@ -78,8 +80,8 @@ sphinx_scope(:ordered_propall) {
                                  #priorities.priority_order as priority_order,
                                  #priorities.name as priority_name from story, priority, status'
              }
+=end
   }
-
   # TODO: Figure out how to do this without running into problems with params
   #       not being undefined at runtime.
   # scope :all_stories, properly_ordered
