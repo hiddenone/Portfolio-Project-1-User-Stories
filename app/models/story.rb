@@ -80,8 +80,9 @@ sphinx_scope(:ordered_propall) {
                                  #priorities.priority_order as priority_order,
                                  #priorities.name as priority_name from story, priority, status'
              }
-=end
+
   }
+=end
   # TODO: Figure out how to do this without running into problems with params
   #       not being undefined at runtime.
   # scope :all_stories, properly_ordered
