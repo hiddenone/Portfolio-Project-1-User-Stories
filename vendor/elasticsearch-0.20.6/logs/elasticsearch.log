@@ -1,0 +1,30 @@
+[2013-12-04 11:29:59,229][INFO ][node                     ] [Adversary] {0.20.6}[4675]: initializing ...
+[2013-12-04 11:29:59,245][INFO ][plugins                  ] [Adversary] loaded [], sites []
+[2013-12-04 11:30:04,793][INFO ][node                     ] [Adversary] {0.20.6}[4675]: initialized
+[2013-12-04 11:30:04,803][INFO ][node                     ] [Adversary] {0.20.6}[4675]: starting ...
+[2013-12-04 11:30:04,960][INFO ][transport                ] [Adversary] bound_address {inet[/0:0:0:0:0:0:0:0:9302]}, publish_address {inet[/192.168.21.128:9302]}
+[2013-12-04 11:30:08,116][INFO ][cluster.service          ] [Adversary] new_master [Adversary][Jr34MlvQR9in_QmK7I9TlA][inet[/192.168.21.128:9302]], reason: zen-disco-join (elected_as_master)
+[2013-12-04 11:30:08,172][INFO ][discovery                ] [Adversary] elasticsearch/Jr34MlvQR9in_QmK7I9TlA
+[2013-12-04 11:30:08,201][INFO ][http                     ] [Adversary] bound_address {inet[/0:0:0:0:0:0:0:0:9202]}, publish_address {inet[/192.168.21.128:9202]}
+[2013-12-04 11:30:08,202][INFO ][node                     ] [Adversary] {0.20.6}[4675]: started
+[2013-12-04 11:30:08,344][INFO ][gateway                  ] [Adversary] recovered [0] indices into cluster_state
+[2013-12-04 11:31:36,704][INFO ][node                     ] [Jones, Angelica] {0.20.6}[4715]: initializing ...
+[2013-12-04 11:31:36,711][INFO ][plugins                  ] [Jones, Angelica] loaded [], sites []
+[2013-12-04 11:31:40,150][INFO ][node                     ] [Jones, Angelica] {0.20.6}[4715]: initialized
+[2013-12-04 11:31:40,153][INFO ][node                     ] [Jones, Angelica] {0.20.6}[4715]: starting ...
+[2013-12-04 11:31:40,312][INFO ][transport                ] [Jones, Angelica] bound_address {inet[/0:0:0:0:0:0:0:0:9303]}, publish_address {inet[/192.168.21.128:9303]}
+[2013-12-04 11:31:43,635][INFO ][cluster.service          ] [Jones, Angelica] new_master [Jones, Angelica][uWgfuzsdT3O41J6WSlBOng][inet[/192.168.21.128:9303]], reason: zen-disco-join (elected_as_master)
+[2013-12-04 11:31:43,790][INFO ][discovery                ] [Jones, Angelica] elasticsearch/uWgfuzsdT3O41J6WSlBOng
+[2013-12-04 11:31:43,829][INFO ][http                     ] [Jones, Angelica] bound_address {inet[/0:0:0:0:0:0:0:0:9203]}, publish_address {inet[/192.168.21.128:9203]}
+[2013-12-04 11:31:43,829][INFO ][node                     ] [Jones, Angelica] {0.20.6}[4715]: started
+[2013-12-04 11:31:44,135][INFO ][gateway                  ] [Jones, Angelica] recovered [0] indices into cluster_state
+[2013-12-04 11:37:37,997][INFO ][node                     ] [Lightbright] {0.20.6}[4774]: initializing ...
+[2013-12-04 11:37:38,005][INFO ][plugins                  ] [Lightbright] loaded [], sites []
+[2013-12-04 11:37:41,943][INFO ][node                     ] [Lightbright] {0.20.6}[4774]: initialized
+[2013-12-04 11:37:41,943][INFO ][node                     ] [Lightbright] {0.20.6}[4774]: starting ...
+[2013-12-04 11:37:42,102][INFO ][transport                ] [Lightbright] bound_address {inet[/0:0:0:0:0:0:0:0:9304]}, publish_address {inet[/192.168.21.128:9304]}
+[2013-12-04 11:37:45,570][INFO ][cluster.service          ] [Lightbright] new_master [Lightbright][OaCve0sNS5StfiKxy986Rg][inet[/192.168.21.128:9304]], reason: zen-disco-join (elected_as_master)
+[2013-12-04 11:37:45,622][INFO ][discovery                ] [Lightbright] elasticsearch/OaCve0sNS5StfiKxy986Rg
+[2013-12-04 11:37:45,658][INFO ][http                     ] [Lightbright] bound_address {inet[/0:0:0:0:0:0:0:0:9204]}, publish_address {inet[/192.168.21.128:9204]}
+[2013-12-04 11:37:45,659][INFO ][node                     ] [Lightbright] {0.20.6}[4774]: started
+[2013-12-04 11:37:45,782][INFO ][gateway                  ] [Lightbright] recovered [0] indices into cluster_state
